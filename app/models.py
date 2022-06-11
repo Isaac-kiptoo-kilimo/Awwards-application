@@ -10,6 +10,9 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
+    first_name=models.CharField(max_length=100,blank=True,null=True)
+    last_name=models.CharField(max_length=100,blank=True,null=True)
+    email=models.CharField(max_length=100,blank=True,null=True)
     proc_img=CloudinaryField('image',blank=True)
     bio=models.TextField(blank=True,null=True)
     contacts=models.CharField(max_length=200)
@@ -20,11 +23,28 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-    def update_profile(self):
-        self.update()
+  
+
+    def update_profile(self,id,profile):
+        updated_profile=Profile.objects.filter(id=id).update(profile)
+        return updated_profile
 
     def __str__(self):
-        return self.contacts
+        return self.user.username
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+            instance.profile.save()
+
+        post_save.connect(Profile, sender=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        Profile.objects.get_or_create(user=instance)
+        instance.profile.save()
+
 
 class Post(models.Model):
     title=models.CharField(max_length=100, null=False)

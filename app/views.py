@@ -19,6 +19,25 @@ def profile(request):
 
 
 def editProfile(request):
+    profiles= Profile.objects.get(user=request.user)
+    # if request.method == 'POST':
+       
+    #     prof_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+    #     if  prof_form.is_valid():
+            
+    #         prof_form.save()
+    #         return redirect('profile')
+            
+            
+    # else:
+    #     # user_form = UpdateUserForm(instance=request.user)
+    #     prof_form = ProfileForm(instance=request.user.profile)
+             
+    # context={
+    #     # 'user_form': user_form,
+    #     'prof_form': prof_form,
+    #     'profiles': profiles
+          # }
     return render(request,'pages/editprofile.html')
 
 
@@ -42,8 +61,7 @@ def register(request):
         password1=request.POST['password1']
         password2=request.POST['password2']
         if password1==password2:   
-            new_user,create = User.objects.create_user(email=email,
-            first_name=first_name,last_name=last_name,username=username,password=password1)
+            new_user,create = User.objects.get_or_create(username=username)
             if create:
                 try:
                     validate_password(password1)

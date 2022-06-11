@@ -6,6 +6,15 @@
         <h3 class="ms-2">{{request.user.username}} 
         </h3>
         <p>{{request.user.profile.bio}}</p>
+        <div>
+            
+            <img src="{{request.new_user.profile.proc_img.url}}" class=" rounded-circle" width="80px" height="80px" alt="">
+            
+           
+            <img src="/static/images/user.webp" width="80px" height="80px" class=" rounded-circle" alt="">
+            
+          
+        </div>
        </div>
        <div>
        <a href="{% url 'editprofile' %}" class="btn btn-outline-success">Edit Profile</a>

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 # from clone.decorators import unauthenticated_user
+from .forms import ProfileForm
 
 
 def index(request):
@@ -20,25 +21,27 @@ def profile(request):
 
 def editProfile(request):
     profiles= Profile.objects.get(user=request.user)
-    # if request.method == 'POST':
+   
+    if request.method == 'POST':
        
-    #     prof_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-    #     if  prof_form.is_valid():
+        prof_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if  prof_form.is_valid():
             
-    #         prof_form.save()
-    #         return redirect('profile')
+            prof_form.save()
+            return redirect('profile')
             
             
-    # else:
-    #     # user_form = UpdateUserForm(instance=request.user)
-    #     prof_form = ProfileForm(instance=request.user.profile)
+    else:
+        # user_form = UpdateUserForm(instance=request.user)
+        prof_form = ProfileForm(instance=request.user.profile)
              
-    # context={
-    #     # 'user_form': user_form,
-    #     'prof_form': prof_form,
-    #     'profiles': profiles
-          # }
-    return render(request,'pages/editprofile.html')
+    context={
+        # 'user_form': user_form,
+        'prof_form': prof_form,
+        'profiles': profiles
+          
+        }
+    return render(request,'pages/editprofile.html',context)
 
 
 def post(request):

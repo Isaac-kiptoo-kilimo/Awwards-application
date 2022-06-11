@@ -7,6 +7,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 # from clone.decorators import unauthenticated_user
 from .forms import ProfileForm
+from django.db.models import Q 
+from django.views.generic import TemplateView, ListView
 
 
 def index(request):
@@ -104,3 +106,15 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('index')
+
+
+class SearchResultsView(ListView):
+    model = Post
+    template_name = "pages/search.html"
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("query")
+        object_list = Post.objects.filter(
+            Q(title__icontains=query)
+        )
+        return object_list

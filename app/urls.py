@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import SearchResultsView
 
 urlpatterns=[
     path('',views.index,name='index'),
@@ -9,4 +10,6 @@ urlpatterns=[
     path('post/',views.post,name='post'),
     path('accounts/login/',views.loginPage,name='login'),
     path('accounts/logout/',views.logoutUser,name='logout'),
+     path("search/", SearchResultsView.as_view(), name="search_results"),
+
 ]

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-4">
+  <div class="card m-4 p-2">
+    <h1>Search Results</h1>
+    <ul>
+      {% for post in object_list %}
+        <p>
+          <a href="#">{{ post.title }}</a>
+          {{ user.fullname }}
+        </p>
+        
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
+
+{% endblock %}

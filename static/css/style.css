@@ -1,0 +1,46 @@
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} */
+#intro{
+    height: 8vh;
+    background-color: #000;
+    color: #fff;
+}
+#intro .text-center{
+    padding-top:1%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+
+}
+
+#second-box{
+    background-color: #f4f7f6;
+    height: 10vh;
+    padding-top: 1%;
+}
+#center{
+    font-weight:400;
+    text-decoration:none solid rgb(32, 33, 33);
+
+}
+.regular-fonts{
+    float: right;
+    margin-right: 2%;
+}
+#label{
+    font-weight: bold;
+    color: #000;
+    font-size: 5vh;
+
+}
+
+
+
+
+
+
+
+
+

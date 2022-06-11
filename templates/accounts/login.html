@@ -9,16 +9,17 @@
             class="img-fluid" alt="Phone image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form>
+          <form action="" method="POST">
+            {% csrf_token %}
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="text" id="form1Example13" class="form-control form-control-lg" />
+              <input type="text" id="form1Example13" class="form-control form-control-lg" name="username" />
               <label class="form-label" for="form1Example13">Username</label>
             </div>
   
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="form1Example23" class="form-control form-control-lg" />
+              <input type="password" id="form1Example23" class="form-control form-control-lg" name="password" />
               <label class="form-label" for="form1Example23">Password</label>
             </div>
   
@@ -28,7 +29,7 @@
                 <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                 <label class="form-check-label" for="form1Example3"> Remember me </label>
               </div>
-              <a href="#!">Forgot password?</a>
+              <a href="{% url 'register' %}">Register Now</a>
             </div>
   
             <!-- Submit button -->

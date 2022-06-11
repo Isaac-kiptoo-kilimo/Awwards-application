@@ -7,8 +7,10 @@
       {% for post in object_list %}
         <p>
           <a href="#">{{ post.title }}</a>
-          {{ user.fullname }}
         </p>
+        <div>
+          <img src="{{post.}}" alt="">
+        </div>
         
       {% endfor %}
     </ul>

@@ -10,17 +10,17 @@ from .forms import ProfileForm
 from django.db.models import Q 
 from django.views.generic import TemplateView, ListView
 
-
+@login_required(login_url='login')
 def index(request):
     user_posts=Post.objects.all()
     return render(request,'pages/index.html',{'posts':user_posts})
 
-
+@login_required(login_url='login')
 def profile(request):
     user=User.objects.all()
     return render(request,'pages/profile.html',{'users':user})
 
-
+@login_required(login_url='login')
 def editProfile(request):
     profiles= Profile.objects.get(user=request.user)
    
@@ -45,7 +45,7 @@ def editProfile(request):
         }
     return render(request,'pages/editprofile.html',context)
 
-
+@login_required(login_url='login')
 def post(request):
     if request.method=='POST':
         photo=request.FILES.get('photo')
@@ -103,6 +103,7 @@ def loginPage(request):
 
     return render(request,'accounts/login.html')
 
+@login_required(login_url='login')
 def logoutUser(request):
     logout(request)
     return redirect('index')

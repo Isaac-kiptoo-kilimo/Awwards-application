@@ -1,26 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Menu</a>
-  <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="get">
-    <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
-  </form>
-  <div class="mt-3" id="name">
-      <p id="label">awwwards</p>
+{% if user.is_authenticated %}
+<div class="container-fluid">
+    <div class="col-md-12" id="intro">
+        <p class="text-center">
+            #StopWarInUkraine save the children
+        </p>
+    
+    </div>
+    <div class="col-md-12 text-center" id="second-box">
+        <!-- <div class="row pt-2" id="second-box">
+            <div class="col-md-2">English</div>
+            <div class="col-md-6 mx-auto">The awards of design, creativity and innovation on the internet</div>
+            <div class="col-md-2 float-md-right"></div>
+        </div> -->
+        <a href="" class="ms-auto">English</a>
+        <span id="center">The awards of design, creativity and innovation on the internet</span>
+        <span class="regular-fonts"><i class="fa-brands fa-instagram-square fonts"></i><i class="fa-brands fa-twitter fonts"></i><i class="fa-brands fa-facebook-f fonts"></i></span>
+    </div>
+   
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light ms-3 row">
+  <div class="col-md-2">
+    <a class="navbar-brand" href="#">Menu</a>
+  </div>
+  <div class="col-md-3">
+    <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="get">
+        <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
+      </form>
+  </div>
+ <div class="col-md-3 mx-2">
+    <div class="mt-3" id="name">
+        <p id="label">awwwards</p>
+    </div>
+ </div>
+
+  <div class="collapse navbar-collapse col-md-4" id="navbarSupportedContent">
+      <div class="row">
+        <ul class="navbar-nav ml-auto">
+           <div class="com-md-6">
+            <li class="nav-item active mx-3">
+                <a class="nav-link" href="{% url 'login' %}">Register/Login <span class="sr-only">(current)</span></a>
+            </li>
+           </div>
+           <div class="cpl-md-6">
+            <li class="nav-item ">
+                <a class="nav-link" href="#"><button type="button" class="btn btn-dark">SUBMIT YOUR SITE!</button></a>
+            </li>
+           </div>
+  
+        </ul>
+      </div>
+
   </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-              <a class="nav-link" href="{% url 'login' %}">Register/Login <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#"><button type="button" class="btn btn-dark">SUBMIT YOUR SITE!</button></a>
-          </li>
-
-      </ul>
-
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
 </nav>
+{% endif %}

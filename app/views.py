@@ -7,8 +7,8 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    posts=Post.objects.all()
-    return render(request,'pages/index.html',{'posts':posts})
+    user_posts=Post.objects.all()
+    return render(request,'pages/index.html',{'posts':user_posts})
 
 
 def profile(request):
@@ -20,7 +20,14 @@ def editProfile(request):
 
 
 def post(request):
-        
+    if request.method=='POST':
+        photo=request.FILES.get('photo')
+        title=request.POST.get('title')
+        description=request.POST.get('description')
+        posts=Post(post_img=photo,title=title,description=description)
+        posts.save_post()
+        print('new post is ',posts)
+        return redirect('index')
     return render(request,'pages/addpost.html')
 
 def register(request):

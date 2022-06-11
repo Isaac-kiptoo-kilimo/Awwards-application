@@ -28,8 +28,8 @@ class Profile(models.Model):
 
 class Post(models.Model):
     title=models.CharField(max_length=100, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    post_img=CloudinaryField('image',blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts",null=True,blank=True)
+    post_img=CloudinaryField('post_img')
     description=models.TextField(null=False)
     created_at=models.DateTimeField(auto_now_add=True)
 

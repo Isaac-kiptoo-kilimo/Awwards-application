@@ -57,13 +57,19 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+# SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
+cloudinary.config( 
+  cloud_name="dneuvrivu", 
+  api_key="826278747664774", 
+  api_secret="KbPsHVMLjIJZdQNPMxTcnfn97Ww",
+ 
+)
 
 # Application definition
 
@@ -74,7 +80,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'app',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +99,7 @@ ROOT_URLCONF = 'awards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 

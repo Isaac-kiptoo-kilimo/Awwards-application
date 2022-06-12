@@ -2,10 +2,65 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row hero">
+    <div class="box-content over mi" >
+        <a href="" class="site-link" aria-label=""></a>
+        <div class="inner vertical-center">
+            <div class="box-info">
+                <div class="row mx-auto D-block">
+                    <h2 class="heading-large"><a href=""
+                                                 style="margin-top:-100px;">{{ random_post.title }}</a>
+                    </h2>
+                </div>
+                <div class="row mx-auto D-block">
+                    <div class="by ">
+                        by <strong><a href="">{{ random_post.user.username }}</a>
+                    </strong> from <strong>{{ random_post.user.profile.location }}</strong>
+                    </div>
+                </div>
+                <div class="box-notesite js-notes">
+                    <ul>
+                        {% for rating in random_post.ratings.all %}
+                        {% if forloop.counter is random_post.ratings.all.count %}
+                        <li class="circle-note-progress style-design" data-note="">
+                            <div class="circle">
+                                <div class="des">
+                                    <p class="d-block mx-auto textrate">{{rating.design_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">DESIGN</div>
+                        </li>
+                        <li class="circle-note-progress style-usability"
+                            data-note="{{rating.usability_average}}">
+                            <div class="circle">
+                                <div class="des1">
+                                    <p class="d-block mx-auto textrate">{{rating.usability_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">USABILITY</div>
+                        </li>
+                        <li class="circle-note-progress style-creativity"
+                            data-note="{{rating.content_average}}">
+                            <div class="circle">
+                                 <div class="des2">
+                                    <p class="d-block mx-auto textrate">{{rating.content_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">CONTENT</div>
+                        </li>
+                        <li class="circle-note-progress style-content" data-note="{{ rating.score }}">
+                            <div class="circle">
+                                 <div class="des3">
+                                    <p class="d-block mx-auto textrate">{{rating.score}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">SCORE</div>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
 
-    </div>
-</div>
 <div class="container">
     
     <div class="row">
@@ -20,3 +75,5 @@
     </div>
 </div>
 {% endblock %}
+
+

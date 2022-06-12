@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 # from clone.decorators import unauthenticated_user
-from .forms import ProfileForm
+from .forms import ProfileForm,RateForm
 from django.db.models import Q 
 from django.views.generic import TemplateView, ListView
 
@@ -119,3 +120,51 @@ class SearchResultsView(ListView):
             Q(title__icontains=query)
         )
         return object_list
+
+
+
+
+
+def project(request, title):
+    post = Post.objects.get(title=title)
+    ratings = Rate.objects.filter(user=request.user, title=title).first()
+    rating_status = None
+    if ratings is None:
+        rating_status = False
+    else:
+        rating_status = True
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.post = post
+            rate.save()
+            post_ratings = Rate.objects.filter(title=title)
+
+            design_ratings = [d.design for d in post_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
+
+            usability_ratings = [us.usability for us in post_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
+
+            content_ratings = [content.content for content in post_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
+
+            score = (design_average + usability_average + content_average) / 3
+            print(score)
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.score = round(score, 2)
+            rate.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = RateForm()
+    params = {
+        'post': post,
+        'rating_form': form,
+        'rating_status': rating_status
+
+    }
+    return render(request, 'pages/project.html', params)

@@ -66,13 +66,26 @@ class Post(models.Model):
 
 
 class Rate(models.Model):
-    title=models.CharField(max_length=100,null=False,blank=True)
-    design = models.IntegerField(null=True,default=0)
-    usability = models.IntegerField(null=True,default=0)
-    content = models.IntegerField(null=True,default=0)
-    creativity = models.IntegerField(null=True,default=0)
-    total = models.IntegerField(blank=True,null=True,default=0)
-    average=models.FloatField(max_length=10,null=True)
+    rating = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10'),
+    )
+    design = models.IntegerField(choices=rating,null=True,default=0)
+    usability = models.IntegerField(choices=rating,null=True,default=0)
+    content = models.IntegerField(choices=rating,null=True,default=0)
+    creativity = models.IntegerField(choices=rating,null=True,default=0)
+    scores = models.FloatField(blank=True,null=True,default=0)
+    design_average = models.FloatField(default=0, blank=True)
+    usability_average = models.FloatField(default=0, blank=True)
+    content_average = models.FloatField(default=0, blank=True)
     user = models.ForeignKey(User,null = True, on_delete=models.CASCADE)
     post = models.ForeignKey(Post,related_name='rate',null=True, on_delete=models.CASCADE)
 

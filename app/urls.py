@@ -10,6 +10,7 @@ urlpatterns=[
     path('post/',views.post,name='post'),
     path('accounts/login/',views.loginPage,name='login'),
     path('accounts/logout/',views.logoutUser,name='logout'),
-     path("search/", SearchResultsView.as_view(), name="search_results"),
+    path("search/", SearchResultsView.as_view(), name="search_results"),
+    path("project/<title>", views.project, name="project"),
 
 ]

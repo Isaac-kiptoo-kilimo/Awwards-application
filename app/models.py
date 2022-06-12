@@ -48,6 +48,8 @@ class Profile(models.Model):
 class Post(models.Model):
     title=models.CharField(max_length=100, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts",null=True,blank=True)
+    url = models.URLField(max_length=255,null=True,blank=True)
+    technologies = models.CharField(max_length=200, blank=True)
     post_img=CloudinaryField('post_img')
     description=models.TextField(null=False)
     created_at=models.DateTimeField(auto_now_add=True)
@@ -87,7 +89,7 @@ class Rate(models.Model):
     usability_average = models.FloatField(default=0, blank=True)
     content_average = models.FloatField(default=0, blank=True)
     user = models.ForeignKey(User,null = True, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,related_name='rate',null=True, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,related_name='rating',null=True, on_delete=models.CASCADE)
 
     def save_rate(self):
         self.save()
@@ -99,4 +101,4 @@ class Rate(models.Model):
         self.update()
         
     def __str__(self):
-        return self.title
+        return self.post.title

@@ -11,6 +11,9 @@ urlpatterns=[
     path('accounts/login/',views.loginPage,name='login'),
     path('accounts/logout/',views.logoutUser,name='logout'),
     path("search/", SearchResultsView.as_view(), name="search_results"),
-    path("project/<title>", views.project, name="project"),
+    path("project/<int:post_id>/", views.project, name="project"),
+    path("rating/<title>", views.rating, name="rating"),
+    path('api/profile/', views.ProfileList.as_view()),
+    path('api/postview/', views.PostList.as_view()),
 
 ]

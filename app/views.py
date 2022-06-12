@@ -17,6 +17,7 @@ from .serializer import PostSerializer,ProfileSerializer
 @login_required(login_url='login')
 def index(request):
     user_posts=Post.objects.all()
+    
     return render(request,'pages/index.html',{'posts':user_posts})
 
 @login_required(login_url='login')
@@ -130,82 +131,53 @@ class SearchResultsView(ListView):
 
 
 
-# def project(request, post_id):
-#     post = Post.objects.get(id=post_id)
-#     ratings = Rate.objects.filter(user=request.user, id=post_id).first()
-#     rating_status = None
-#     if ratings is None:
-#         rating_status = False
-#     else:
-#         rating_status = True
-#     if request.method == 'POST':
-#         form = RateForm(request.POST)
-#         if form.is_valid():
-#             rate = form.save(commit=False)
-#             rate.user = request.user
-#             rate.post = post
-#             rate.save()
-#             post_ratings = Rate.objects.filter(post=post)
+def project(request, post_id):
+    post = Post.objects.get(id=post_id)
+    ratings = Rate.objects.filter(user=request.user, id=post_id).first()
+    rating_status = None
+    if ratings is None:
+        rating_status = False
+    else:
+        rating_status = True
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.post = post
+            rate.save()
+            post_ratings = Rate.objects.filter(post=post)
 
-#             design_ratings = [d.design for d in post_ratings]
-#             design_average = sum(design_ratings) / len(design_ratings)
+            design_ratings = [d.design for d in post_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
 
-#             usability_ratings = [us.usability for us in post_ratings]
-#             usability_average = sum(usability_ratings) / len(usability_ratings)
+            usability_ratings = [us.usability for us in post_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
 
-#             content_ratings = [content.content for content in post_ratings]
-#             content_average = sum(content_ratings) / len(content_ratings)
+            content_ratings = [content.content for content in post_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
 
-#             score = (design_average + usability_average + content_average) / 3
-#             print(score)
-#             rate.design_average = round(design_average, 2)
-#             rate.usability_average = round(usability_average, 2)
-#             rate.content_average = round(content_average, 2)
-#             rate.score = round(score, 2)
-#             rate.save()
-#             print('scrore 2',score)
-#             return HttpResponseRedirect(request.path_info)
-#     else:
-#         form = RateForm()
-#     params = {
-#         'post': post,
-#         'rating_form': form,
-#         'rating_status': rating_status
+            scores = (design_average + usability_average + content_average) / 3
+            print(scores)
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.scores = round(scores, 2)
+            rate.save()
+            print('scrore 2',scores)
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = RateForm()
+    params = {
+        'post': post,
+        'rating_form': form,
+        'rating_status': rating_status
 
-#     }
-#     return render(request, 'pages/project.html', params)
+    }
+    return render(request, 'pages/project.html', params )
 
 
-def rating(request, title):
-    if request.method =="POST":
-        project = Post.objects.get(title=title),
-        # user = request.user,
-        comment = request.POST['comment']
-        design= request.POST['design']
-        usability= request.POST['usability']
-        content= request.POST['content']
-        creativity= request.POST['creativity']
-          
-        ratings = Rate.objects.create(
-            # project = project,
-            # user = user,
-            comment = comment,
-            design=design,
-            usability=usability,
-            content=content, 
-            creativity=creativity,
-            total= (int(design)) + (int(usability)) + (int(content)) + (int(creativity)) ,    
-        )
-        ratings.save()
-        # print(ratings)
-        # average_creativity= sum(creativity)/len(creativity) 
-        # average_design= sum(design)/len(design) 
-        # average_usability= sum(usability)/len(usability)
-        # average_content= sum(content)/len(content)
-        # average =(average_creativity+ average_content+ average_design + average_usability)/4
-        
-        return redirect ('index')
-    return render(request, 'pages/rating.html')
+
 
 class ProfileList(APIView):
     def get(self, request, format=None):

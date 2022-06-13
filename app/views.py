@@ -13,12 +13,14 @@ from django.views.generic import TemplateView, ListView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import PostSerializer,ProfileSerializer
+from datetime import date
 
 @login_required(login_url='login')
 def index(request):
+    today = date.today()
     user_posts=Post.objects.all()
     
-    return render(request,'pages/index.html',{'posts':user_posts})
+    return render(request,'pages/index.html',{'posts':user_posts,'today':today})
 
 @login_required(login_url='login')
 def profile(request):
@@ -81,7 +83,7 @@ def register(request):
                     new_user.profile.first_name=first_name
                     new_user.profile.last_name=last_name
                     new_user.profile.username=username
-                    new_user.profile.email=email
+                   
                     new_user.profile.save()
                     new_user.save()
                     return redirect('login')
@@ -100,7 +102,7 @@ def loginPage(request):
         username=request.POST['username']
         password=request.POST['password']
        
-        user=authenticate(username=username,password=password)
+        user=authenticate(request,username=username,password=password)
         
         if user is not None:
             login(request,user)
@@ -130,7 +132,7 @@ class SearchResultsView(ListView):
 
 
 
-
+@login_required(login_url='login')
 def project(request, post_id):
     post = Post.objects.get(id=post_id)
     ratings = Rate.objects.filter(user=request.user, id=post_id).first()

@@ -135,5 +135,22 @@
     color: white;
 }
 
+.menu ::before{
+    content: "";
+    width: 10px;
+    height: 2px;
+    border: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+}
+
+.hero-btns{
+    display: flex;
+    align-items: center;
+    margin-left: 80px;
+
+}
 /* style="background-image:url('{% static 'images' %}')"  */
 

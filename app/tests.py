@@ -1,28 +1,18 @@
 from django.test import TestCase
 
-
-
 from .models import *
 
 # Create your tests here.
-class ImageTestClass(TestCase):
+class PostTestClass(TestCase):
     def setUp(self):
-        self.profile = Profile(first_name='isaac',last_name='kiptoo',proc_img='isaac.png',bio='am i a tm',email='isaac@gmail',contacts='0712345678')
+        self.profile = Profile('8',first_name='isaac',last_name='kiptoo',proc_img='isaac.png',bio='am i a tm',email='isaac@gmail',contacts='0712345678')
         self.profile.save_profile()
 
-
-    #  title=models.CharField(max_length=100, null=False)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts",null=True,blank=True)
-    # url = models.URLField(max_length=255,null=True,blank=True)
-    # technologies = models.CharField(max_length=200, blank=True)
-    # post_img=CloudinaryField('post_img')
-    # description=models.TextField(null=False)
-    # created_at=models.DateTimeField(auto_now_add=True)
-
-        self.comment = Rate(rate='10')
-        self.comment.save_rate()
+        self.rate = Rate(scores='10')
+        self.rate.save_rate()
 
         self.initial_test= Post(title='creativity',user='isaac',url='',technologies = 'django/python',post_img='isaac.png',  description='the image is in good condition',created_at='25-04-2022',profile=self.profile,rate=self.rate)
+
 # Testing  instance
     def test_instance(self):
         self.assertTrue(isinstance(self.initial_test,Post))
@@ -62,21 +52,21 @@ class RateTestClass(TestCase):
 
     # Set up method
     def setUp(self):
-        self.comment = comment=('Fruits')
-        self.comment.save_comment()
+        self.rate = Rate(scores='10')
+        self.rate.save_rate()
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.comment, Comment))
+        self.assertTrue(isinstance(self.rate, Rate))
 
-    def test_save_comment(self):
-        self.comment.save_comment()
-        comments = Comment.objects.all()
-        self.assertTrue(len(comments) > 0)
+    def test_save_rate(self):
+        self.rate.save_rate()
+        rates = Rate.objects.all()
+        self.assertTrue(len(rates) > 0)
 
-    def test_delete_comment(self):
-        self.comment.delete_comment()
-        comment = Comment.objects.all()
-        self.assertTrue(len(comment) == 0)
+    def test_delete_rate(self):
+        self.rate.delete_rate()
+        rate = Rate.objects.all()
+        self.assertTrue(len(rate) == 0)
 
 
    
@@ -85,7 +75,7 @@ class ProfileTestClass(TestCase):
 
     # Set up method
     def setUp(self):
-        self.profile = Profile(fullname='isaac kiptoo',profile_img='isaac.png',bio='am i a tm',email_phone='isaac@gmail',followers='2')
+        self.profile = Profile('3',first_name='isaac',last_name='kiptoo',proc_img='isaac.png',bio='am i a tm',email='isaac@gmail',contacts='0712345678')
         self.profile.save_profile()
 
     def test_instance(self):

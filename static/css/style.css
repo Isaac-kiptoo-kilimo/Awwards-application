@@ -1,8 +1,8 @@
-/* *{
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-} */
+}
 #intro{
     height: 8vh;
     background-color: #000;
@@ -42,13 +42,13 @@
     background: url(/static/images/marble-studio-cover.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-position: realative; */
+    
 }
 
 
 
 
-/* #design{
+#design{
     color:white;
     border: 3px solid orange;
     border-radius: 50%;
@@ -58,7 +58,7 @@
     padding-top:20px;
     margin-right:10px;
     margin-left:70px;
-} */
+}
 .des,.des1,.des2,.des3{
     color:white;
     border-radius: 50%;
@@ -151,6 +151,9 @@
     align-items: center;
     margin-left: 80px;
 
+}
+.overlay{
+    height: 70vh;
 }
 /* style="background-image:url('{% static 'images' %}')"  */
 

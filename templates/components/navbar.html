@@ -20,7 +20,7 @@
 </div>
 <nav class="navbar navbar-expand-lg  navbar-light ">
   <div class="col-md-2">
-    <a class="navbar-brand menu" href="#">Menu</a>
+    <a class="navbar-brand menu ms-2" href="#">Menu</a>
   </div>
   <div class="col-md-3">
     <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="get">
@@ -29,7 +29,7 @@
   </div>
  <div class="col-md-2 mx-2">
     <div class="mt-2" id="name">
-        <p id="label">awwwards.</p>
+        <a class="text-decoration-none" href="{% url 'index' %}"><p id="label">awwwards.</p></a>
     </div>
  </div>
  <div class="col-md-2">
@@ -45,7 +45,9 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item"  href="{% url 'profile' %}"> <img src="/static/images/user.webp" class="mx-3
                 " width="20px" alt=""> Profile</a>
-              <a class="dropdown-item" href="{% url 'profile' %}">
+                <a class="dropdown-item"  href="{% url 'editprofile' %}"> <img src="/static/images/user.webp" class="mx-3
+                  " width="20px" alt="">Edit Profile</a>
+                
                   <hr>
                 
               <li><a class="dropdown-item" class="mx-3

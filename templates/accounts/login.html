@@ -1,25 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <!-- Default form login -->
-<section class="vh-100">
-    <div class="container py-5 h-100">
-      <div class="row d-flex align-items-center justify-content-center h-100">
-        <div>
-          <h2 class="text-center">You Have an Account</h2>
-        </div>
-        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+<section class="vh-100 ">
+  <div class="container mt-5 h-100">
+    <div class="row">
+      <div class="col-md-5 offset-md-3">
+        <div class="h-100">
+        <div class="user_card p-3 card bg-light">
+            <div class="text-center my-3">
+            
+              <h3 class="text-info">
+                Login
+              </h3>
+            </div>
+        <div class="form_container px-3 ">
           <form action="" method="POST">
             {% csrf_token %}
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="text" id="form1Example13" class="form-control form-control-lg" name="username" />
               <label class="form-label" for="form1Example13">Username</label>
+              <input type="text" id="form1Example13" class="form-control form-control-lg" name="username" />
+              
             </div>
   
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="password" class="form-control form-control-lg" name="password" />
               <label class="form-label" for="password">Password</label>
+              <input type="password" id="password" class="form-control form-control-lg" name="password" />
+              
             </div>
   
             <div class="d-flex justify-content-around align-items-center mb-4">
@@ -28,15 +36,21 @@
                 <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                 <label class="form-check-label" for="form1Example3"> Remember me </label>
               </div>
-              <a href="{% url 'register' %}">Register Now</a>
+              <div>
+              <p>Dnt have an Account:</p>
+              <a href="{% url 'register' %}">Sign Up</a>
+              </div>
             </div>
   
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+            <button type="submit" class="btn m-3 btn-outline-info ">Login</button>
 
           </form>
         </div>
       </div>
+      </div>
+      </div>
+     </div>
     </div>
   </section>
 {% endblock %}

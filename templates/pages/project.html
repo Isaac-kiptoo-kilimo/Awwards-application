@@ -1,70 +1,93 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container" style="margin-top:8%">
+<nav class="navbar navbar-expand-lg  navbar-light ">
+    <div class="col-md-2">
+      <a class="navbar-brand menu ms-2" href="#">Menu</a>
+    </div>
+    <div class="col-md-3">
+      <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="get">
+          <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+   <div class="col-md-2 mx-2">
+      <div class="mt-2" id="name">
+          <a class="text-decoration-none" href="{% url 'index' %}"><p id="label">awwwards.</p></a>
+      </div>
+   </div>
+   <div class="col-md-2">
+      <div class="mt-3" id="name">
+         <a href=""></a>
+      </div>
+   </div>
+    <div class="collapse navbar-collapse  d-flex col-md-3" id="navbarSupportedContent">
+          <div class="nav-item dropdown">
+              <a class="" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="/static/images/user.webp" width="27px" alt="{{image.profile_img}}">
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"  href="{% url 'profile' %}"> <img src="/static/images/user.webp" class="mx-3
+                  " width="20px" alt=""> Profile</a>
+                  <a class="dropdown-item"  href="{% url 'editprofile' %}"> <img src="/static/images/user.webp" class="mx-3
+                    " width="20px" alt="">Edit Profile</a>
+                  
+                    <hr>
+                  
+                <li><a class="dropdown-item" class="mx-3
+                  " href="{% url 'logout' %}">LogOut</a></li>
+                 
+              </ul>
+            </div>
+             <div class="mx-3">
+              <div class="nav-item ">
+                  <a class="nav-link bg-info  text-white" href="{% url 'post' %}">SUBMIT YOUR SITE!</a>
+              </div>
+             </div>
+    
+          </ul>
+  
+    </div>
+  
+  </nav>
+<div class="container my-5" style="margin-top:8%">
     <h5 class="mb-4 mt-4">{{ post.title }} by {{request.user.username}} <span
             id="heart"> <i class="fas fa-heart"></i></span></h5>
 
-    <div class="card">
-        <div class="view overlay" >
-            <img src="{{post.post_img.url}}"class="p-0 m-0" height="600px" width="100%"  alt="{{post.title}}">
-            <img class="card-img-top" style="visibility:hidden" width="100%"
-                 src="{{ post.photo.cdn_url }}-/crop/1440x720/center/-/quality/lightest/" alt="{{photo.title}}">
-            <a href="">
-                <div class="mask rgba-black-slight">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6 d-flex flex-row mx-auto" style="margin-top:20%">
-                                
-                                <div id="design">{{ rating.design_average}}<br>
-                                    <span class="rates">design</span>
-                                </div>
-                                <div id="usable" class="mx-auto">{{ rating.usability_average }}<br>
-                                    <span class="rates">usability</span>
-                                </div>
-                                <div id="contente">{{ rating.content_average }}<br>
-                                    <span class="rates">content</span>
-                                </div>
-                               
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                    </div>
-
+            <div class="card">
+                <div class="view overlay " style="background-image:url({{post.post_img.url}})">
+                    <img class="card-img-top" style="visibility:hidden" width="100%"
+                         src="{{ post.photo.cdn_url }}-/crop/1440x720/center/-/quality/lightest/" alt="{{photo.title}}">
+                    <a href="" class=" text-decoration-none text-white">
+                       
+                    </a>
                 </div>
-            </a>
-        </div>
         <div class="card-body">
             <h5 class="card-title"><strong>{{post.title|title}}</strong>
                 <a href="{{ post.url }}" style="float:right" class="btn btn-sm btn-info mr-4"> Visit </a></h5>
-            <p>by <span><a href="" id="usern" class="mr-2">{{ post.user.username|title }}</a></span>({{post.user.profile.location}})
-            </p>
+         
             <p>{{ post.description }}</p>
             <hr>
             <p class="card-text "><img src="{{post.user.profile.profile_picture.url}}" class="nav-img mr-2" alt="">
-                By {{post.user.username|title}} <span style="float:right">{{post.date|date}}</span>
+                By {{post.user.username}} <span style="float:right">{{post.date|date}}</span>
             </p>
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <h3 class="D-block mx-auto">Ratings Scores</h3>
-                    {% for rating in post.ratings.all %}
-                    {% if forloop.counter is post.ratings.all.count %}
-                    <a class="btn btn-info btn-sm" ><h5>{{ rating.score }}</h5>
+                    
+                    <a class="btn btn-info btn-sm" ><h5>7.80</h5>
                         <span class="sc">Average Score</span>
                     </a>
-                    <a class="btn btn-outline-success btn-sm" ><h5>{{ rating.design_average }}</h5>
+                    <a class="btn btn-outline-success btn-sm" ><h5>8.03</h5>
                         <span class="sc">Design Average</span>
                     </a>
-                    <a class="btn btn-outline-primary btn-sm" id="u"><h5>{{ rating.usability_average }}</h5>
+                    <a class="btn btn-outline-primary btn-sm" id="u"><h5>8.04</h5>
                         <span class="sc">Usability Average</span>
                     </a>
-                    <a class="btn btn-outline-danger btn-sm" id="c"><h5>{{ rating.content_average }}</h5>
+                    <a class="btn btn-outline-danger btn-sm" id="c"><h5>8.14</h5>
                         <span class="sc">Content Average</span>
                     </a>
-                    {% endif %}
-                    {% endfor %}
+                    
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -81,7 +104,5 @@
             {% endif %}
             {% endif %}
         </div>
-
-    </div>
 </div>
 {% endblock %}

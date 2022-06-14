@@ -65,6 +65,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def totalRatings(self):
+        ratings=Rate.objects.filter(post=self)
+        return len(ratings)
+
+    def design_average(self):
+        sum=0
+        ratings=Rate.objects.filter(post=self)
+        for rating in ratings:
+            sum+=rating.design
+
+        if len(ratings)>0:
+            return sum/len(ratings)
+        else:
+            return 0
 
 class Rate(models.Model):
     rating = (
@@ -99,5 +113,5 @@ class Rate(models.Model):
     def update_rate(self):
         self.update()
         
-    def __str__(self):
-        return self.post.title
+    def __int__(self):
+        return self.design_average

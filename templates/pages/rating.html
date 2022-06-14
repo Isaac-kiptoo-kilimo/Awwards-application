@@ -76,17 +76,20 @@
                 <div class="col-md-8">
                     <h3 class="D-block mx-auto">Ratings Scores</h3>
                     
-                    <a class="btn btn-info btn-sm" ><h5>8.3</h5>
+                    <a class="btn btn-info btn-sm" ><h5>{{ratings.score_average}}</h5>
                         <span class="sc">Average Score</span>
                     </a>
-                    <a class="btn btn-outline-success btn-sm" ><h5> 7.8</h5>
+                    <a class="btn btn-outline-success btn-sm" ><h5> {{ratings.design_average}}</h5>
                         <span class="sc">Design Average</span>
                     </a>
-                    <a class="btn btn-outline-primary btn-sm" id="u"><h5>8.0</h5>
+                    <a class="btn btn-outline-primary btn-sm" id="u"><h5>{{ratings.usability_average}}</h5>
                         <span class="sc">Usability Average</span>
                     </a>
-                    <a class="btn btn-outline-danger btn-sm" id="c"><h5>8.2</h5>
+                    <a class="btn btn-outline-danger btn-sm" id="c"><h5>{{ratings.content_average}}</h5>
                         <span class="sc">Content Average</span>
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" id="c"><h5>{{ratings.creativity_average}}</h5>
+                        <span class="sc">Creativity Average</span>
                     </a>
                     
                 </div>
@@ -94,49 +97,14 @@
                
                 <div class="col-md-2"></div>
             </div>
-            
 
-            {% if rating_status %}
-            <h5>You have already voted</h5>
-            {% else %}
-            {% if user.is_authenticated %}
-            <form class="ratings-form" action="" method="POST">
+         
+            <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <!-- <div class="mb-3">
-                    <label for="Comment">Comment</label>
-                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
-                </div> -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="mb-3">
-                            <label for="Design">Design</label>
-                            <input type="number" class="form-control" name="design" min="0" max="10" value="0">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mb-3">
-                            <label for="Usability">Usability</label>
-                            <input type="number" class="form-control" name="usability" min="0" max="10" value="0">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="mb-3">
-                            <label for="Content">Content</label>
-                            <input type="number" class="form-control" name="content" min="0" max="10" value="0">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mb-3">
-                            <label for="Creativity">Creativity</label>
-                            <input type="number" class="form-control" name="creativity" min="0" max="10" value="0">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Rate</button>
-            {% endif %}
-            {% endif %}
+                {{form|crispy}}
+                <button class="btn btn-sm btn-info" type="submit">Rate</button>
+            </form>
+          
         </div>
 </div>
 {% endblock %}

@@ -32,15 +32,20 @@
         <a class="text-decoration-none" href="{% url 'index' %}"><p id="label">awwwards.</p></a>
     </div>
  </div>
- <div class="col-md-2">
+ <div class="col-md-1">
     <div class="mt-3" id="name">
-       <a href=""></a>
+      <p class="text-uppercase d-flex justify-content-end me-2">{{request.user.username}}</p>
     </div>
  </div>
   <div class="collapse navbar-collapse  d-flex col-md-3" id="navbarSupportedContent">
         <div class="nav-item dropdown">
-            <a class="" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/static/images/user.webp" width="27px" alt="{{image.profile_img}}">
+         
+            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              {% if user.profile.proc_img %}
+              <img src="{{user.profile.proc_img.url}}" width="80px" height="80px" class=" rounded-circle ms-3" alt="">
+              {% else %}
+              <img src="/static/images/user.webp" width="40px" height="40px" class=" rounded-circle" alt="">
+              {% endif %}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item"  href="{% url 'profile' %}"> <img src="/static/images/user.webp" class="mx-3

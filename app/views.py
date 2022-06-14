@@ -1,3 +1,4 @@
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
@@ -20,8 +21,11 @@ from datetime import date
 def index(request):
     today = date.today()
     user_posts=Post.objects.all()
+    post=Post.objects.all().first()
+    ratings=Rate.objects.filter(post=post)
+    aves=create_average(ratings)
     
-    return render(request,'pages/index.html',{'posts':user_posts,'today':today})
+    return render(request,'pages/index.html',{'posts':user_posts,'today':today,'post':post,'aves':aves})
 
 @login_required(login_url='login')
 def profile(request):
@@ -141,31 +145,51 @@ class SearchResultsView(ListView):
 
 @login_required(login_url='login')
 def rating(request,post_id):
-    post = Post.objects.get(id=post_id)
-    ratings = Rate.objects.filter(user=request.user, id=post_id).first()
-    if request.method =="POST":
-        post = Post.objects.get(id=post_id),
-        current_user = request.user,
-        design= request.POST['design']
-        usability= request.POST['usability']
-        content= request.POST['content']
-        creativity= request.POST['creativity']
-            
-        ratings =Rate.objects.create(
-           
-            design=design,
-            usability=usability,
-            content=content, 
-            creativity=creativity,
-            # scores= (int(design)) + (int(usability)) + (int(content)) + (int(creativity)) ,  
-            scores=((float(design) + float(usability) + float(content) + float(creativity))/4),
-            user = request.user,
-            post = Post.objects.get(id=post_id),  
-        )
-        return redirect ('index')
-    else:
-       
-        return render(request,'pages/rating.html',{'post':post, 'ratings':ratings})
+
+    user=request.user
+    post=Post.objects.get(id=post_id)
+    ratings=Rate.objects.filter(post=post)
+    
+    form=RateForm(request.POST)
+    if request.method=='POST':
+       if form.is_valid():
+           design=form.cleaned_data['design']
+           usability=form.cleaned_data['usability']
+           content=form.cleaned_data['content']
+           creativity=form.cleaned_data['creativity']
+           new_rate=Rate(design=design,usability=usability,content=content,creativity=creativity,user=user,post=post)
+           new_rate.save()
+           return redirect('rating',post_id=post_id)
+    cxt={
+        'form':form,
+        'post':post,
+        'ratings':create_average(ratings)
+    }
+    return render(request,'pages/rating.html',cxt)
+
+def create_average(ratings):
+    design=0
+    usability=0
+    content=0
+    creativity=0
+    for rate in ratings:
+        design+=int(rate.design)
+        usability+=int(rate.usability)
+        content+=int(rate.content)
+        creativity+=int(rate.creativity)
+    
+    des_av=design/len(ratings)
+    usa_av=usability/len(ratings)
+    con_av=content/len(ratings)
+    creat_av=creativity/len(ratings)
+    score_av=(des_av+usa_av+con_av+creat_av)/4
+    return {
+        'design_average':des_av,
+        'usability_average':usa_av,
+        'content_average':con_av,
+        'creativity_average':creat_av,
+        'score_average':score_av
+    }
 
 class ProfileList(APIView):
     def get(self, request, format=None):

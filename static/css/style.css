@@ -162,5 +162,9 @@ body{
 .list-style{
     list-style: none;
 }
+
+#navbarDropdown{
+    font-size: 35px;
+}
 /* style="background-image:url('{% static 'images' %}')"  */
 

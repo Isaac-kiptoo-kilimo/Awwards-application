@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from app.decorators import unauthenticated_user
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
@@ -66,6 +67,7 @@ def post(request):
         return redirect('index')
     return render(request,'pages/addpost.html')
 
+@unauthenticated_user
 def register(request):
     if request.method=='POST':
         email=request.POST['email']
@@ -95,7 +97,7 @@ def register(request):
 
     return render(request,'accounts/register.html')
 
-
+@unauthenticated_user
 def loginPage(request):
 
     if request.method=='POST':

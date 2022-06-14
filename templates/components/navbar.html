@@ -39,16 +39,24 @@
  </div>
   <div class="collapse navbar-collapse col-md-2" id="navbarSupportedContent">
       <div class="row">
-        <ul class="navbar-nav ml-auto">
-           <div class="com-md-6">
-            <li class="nav-item active mx-3">
-                <a class="nav-link" href="{% url 'login' %}">Register/Login </a>
-            </li>
-           </div>
+        <div class="nav-item dropdown">
+            <a class="" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/static/images/user.webp" width="27px" alt="{{image.profile_img}}">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item"  href="{% url 'profile' %}"> <img src="/static/images/user.webp" class="mx-3
+                " width="20px" alt=""> Profile</a>
+              <a class="dropdown-item" href="{% url 'profile' %}">
+                
+              <li><a class="dropdown-item" class="mx-3
+                " href="{% url 'logout' %}">LogOut</a></li>
+               
+            </ul>
+          </div>
            <div class="col-md-6">
-            <li class="nav-item ">
+            <div class="nav-item ">
                 <a class="nav-link" href="#"><button type="button" class="btn btn-dark  p-2">SUBMIT YOUR SITE!</button></a>
-            </li>
+            </div>
            </div>
   
         </ul>

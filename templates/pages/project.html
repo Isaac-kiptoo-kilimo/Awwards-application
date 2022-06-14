@@ -2,11 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container" style="margin-top:8%">
-    <h5 class="mb-4 mt-4">{{ post.title }} by {{ post.user.username }} from {{ post.user.profile.location }} <span
+    <h5 class="mb-4 mt-4">{{ post.title }} by {{request.user.username}} <span
             id="heart"> <i class="fas fa-heart"></i></span></h5>
 
     <div class="card">
         <div class="view overlay" >
+            <img src="{{post.post_img.url}}"class="p-0 m-0" height="600px" width="100%"  alt="{{post.title}}">
             <img class="card-img-top" style="visibility:hidden" width="100%"
                  src="{{ post.photo.cdn_url }}-/crop/1440x720/center/-/quality/lightest/" alt="{{photo.title}}">
             <a href="">
@@ -15,8 +16,7 @@
                         <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-6 d-flex flex-row mx-auto" style="margin-top:20%">
-                                {% for rating in post.ratings.all %}
-                                {% if forloop.counter is post.ratings.all.count %}
+                                
                                 <div id="design">{{ rating.design_average}}<br>
                                     <span class="rates">design</span>
                                 </div>
@@ -26,8 +26,7 @@
                                 <div id="contente">{{ rating.content_average }}<br>
                                     <span class="rates">content</span>
                                 </div>
-                                {% endif %}
-                                {% endfor %}
+                               
                             </div>
                             <div class="col-md-3"></div>
                         </div>

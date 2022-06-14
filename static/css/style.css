@@ -48,7 +48,7 @@
 
 
 
-#design{
+/* #design{
     color:white;
     border: 3px solid orange;
     border-radius: 50%;
@@ -58,13 +58,13 @@
     padding-top:20px;
     margin-right:10px;
     margin-left:70px;
-}
+} */
 .des,.des1,.des2,.des3{
     color:white;
     border-radius: 50%;
     height:78px;
     width:78px;
-    padding-top:30%;
+    /* padding-top:30%; */
     font-size:17px;
 }
 .des{

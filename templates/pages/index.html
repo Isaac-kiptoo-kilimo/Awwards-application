@@ -10,6 +10,45 @@
                 <h3 class="">Santa Teresa</h3>
                 <p>BY <span class="text-info">LG2</span> FROM CANADA WITH 7.46 </p>
                 </div>
+               </div>
+               <div class="row">
+                <div class="  col-md-6 d-flex justify-content-center offset-md-3 text-white ">
+                        <li class="circle-note-progress style-design mx-2 list-style-none" data-note="">
+                            <div class="circle">
+                                <div class="des">
+                                    <p class="">{{rating.design_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">DESIGN</div>
+                        </li>
+                        <li class="circle-note-progress style-usability mx-2"
+                            data-note="{{rating.usability_average}}">
+                            <div class="circle">
+                                <div class="des1">
+                                    <p class="d-block mx-auto textrate">{{rating.usability_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">USABILITY</div>
+                        </li>
+                        <li class="circle-note-progress style-creativity mx-2"
+                            data-note="{{rating.content_average}}">
+                            <div class="circle">
+                                 <div class="des2">
+                                    <p class="d-block mx-auto textrate">{{rating.content_average}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">CONTENT</div>
+                        </li>
+                        <li class="circle-note-progress style-content mx-2" data-note="{{ rating.score }}">
+                            <div class="circle">
+                                 <div class="des3">
+                                    <p class="d-block mx-auto textrate">{{rating.score}}</p>
+                                </div>
+                            </div>
+                            <div class="legend">SCORE</div>
+                        </li>
+                  
+                </div>
 
             </div>
         </div>

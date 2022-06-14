@@ -67,6 +67,13 @@ def post(request):
         return redirect('index')
     return render(request,'pages/addpost.html')
 
+def view_post(request,post_id):
+    post = Post.objects.get(id=post_id)
+    cxt={
+        'post':post
+    }
+    return render(request,'pages/view_post.html',cxt)
+
 @unauthenticated_user
 def register(request):
     if request.method=='POST':

@@ -70,22 +70,20 @@ def post(request):
 @unauthenticated_user
 def register(request):
     if request.method=='POST':
-        email=request.POST['email']
-        first_name=request.POST['first_name']
-        last_name=request.POST['last_name']
-        username=request.POST['username']
-        password1=request.POST['password1']
-        password2=request.POST['password2']
+        email=request.POST.get('email')
+        fullname=request.POST.get('fullname')
+        username=request.POST.get('username')
+        password1=request.POST.get('password1')
+        password2=request.POST.get('password2')
         if password1==password2:   
             new_user,create = User.objects.get_or_create(username=username)
             if create:
                 try:
                     validate_password(password1)
                     new_user.set_password(password1)
-                    new_user.profile.first_name=first_name
-                    new_user.profile.last_name=last_name
+                    new_user.profile.fullname=fullname
                     new_user.profile.username=username
-                   
+                    new_user.profile.email=email
                     new_user.profile.save()
                     new_user.save()
                     return redirect('login')

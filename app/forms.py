@@ -8,7 +8,7 @@ from django.forms import ModelForm
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['first_name','last_name','proc_img','bio','email','contacts']
+        fields = ['email','fullname','proc_img','bio','contacts']
 
 class RateForm(forms.ModelForm):
     class Meta:

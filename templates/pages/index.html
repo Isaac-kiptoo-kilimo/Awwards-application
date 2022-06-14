@@ -28,17 +28,27 @@
     </div>
 </div>
 
-<div class="container">
-    
+
+<div class="container my-5">
+    <h4 class="mt-3">Websites Available</h4>
     <div class="row mt-3">
         {% for post in posts %}
-        <div class="col-md-4">
-           <p> {{post.title}}</p>
-           <p> {{post.description}}</p>
+        <div class="col-md-4 card shadow-sm p-3 mb-5 bg-body rounded">
+           
+           <!-- <p> {{post.description}}</p> -->
             <a href="/project/{{post.id}}">
-                <img src="{{post.post_img.url}}" width="70%"  alt="{{post.title}}">
+                <img src="{{post.post_img.url}}"class="p-0 m-0" height="400px" width="100%"  alt="{{post.title}}">
             </a>
-           <p> {{post.created_at}}</p>
+            <div class="d-flex m-3">
+                <p class="text-uppercase text-info"> {{post.title}}</p>
+                <a href="/project/{{post.id}}" class=" text-info border border-info px-4 py-0 text-decoration-none mx-4">View</a>
+            </div>
+            <hr>
+            <div class="d-flex m-2">   
+            <img src="{{request.user.profile.proc_img.url}}" class=" rounded-circle " width="40px" height="40px" alt="profile image">
+            <p class="ms-2">By:{{request.user.username}}</p> 
+            <p class="mx-3"> {{post.created_at}}</p>
+            </div>
         </div>
         {% endfor %}
     </div>

@@ -61,7 +61,7 @@ def post(request):
         url=request.POST.get('url')
         technologies=request.POST.get('technologies')
         description=request.POST.get('description')
-        posts=Post(post_img=photo,title=title,url=url,technologies=technologies,description=description)
+        posts=Post(post_img=photo,title=title,url=url,technologies=technologies,description=description,user=request.user)
         posts.save_post()
         print('new post is ',posts)
         return redirect('index')
@@ -83,7 +83,7 @@ def register(request):
         password1=request.POST.get('password1')
         password2=request.POST.get('password2')
         if password1==password2:   
-            new_user,create = User.objects.get_or_create(username=username)
+            new_user,create = User.objects.get_or_create(username=username,email=email)
             if create:
                 try:
                     validate_password(password1)

@@ -3,6 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    overflow-x: hidden;
+}
 #intro{
     height: 8vh;
     background-color: #000;
@@ -41,6 +44,7 @@
     height: 65vh;
     background: url(/static/images/marble-studio-cover.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
     background-repeat: no-repeat;
     
 }
@@ -154,6 +158,9 @@
 }
 .overlay{
     height: 70vh;
+}
+.list-style{
+    list-style: none;
 }
 /* style="background-image:url('{% static 'images' %}')"  */
 

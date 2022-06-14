@@ -1,61 +1,84 @@
 {% extends 'base.html' %}
 {% block content %}
-<!-- Default form register -->
-<section class="vh-100 bg-image "
-  >
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card my-5" style="border-radius: 15px; ">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+<div class="container my-5 h-100">
+    <div class="row ">
+        <div class="col-md-5 offset-md-3">
+            <div class=" h-100">
+                <div class="user_card card">
+                    <div class="text-center my-3">
+                        <img src="/static/images/instagramClearbg.png" class="my-2" alt="">
+                        <p class="text-secondary">Sign up to see photos and <br> videos from your friends.</p>
 
-              <form action="{% url 'register' %}" method="POST" >
-                {% csrf_token %}
-
-                <div class="form-outline mb-4">
-                  <input type="email" id="email" class="form-control form-control-lg" name="email" />
-                  <label class="form-label" for="email">Your Email</label>
+                    </div>
+                    <div>
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="p-2 alert alert-danger">
+                            {{message}}
+                        </div>
+                        {% else %}
+                        <div class="p-2 alert alert-{{message.tags}}">
+                            {{message}}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex justify-content-center form_container text-secondary">
+        
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="input-group mb-2">
+                              <input type="text" class="form-control shadow-none input-lg" name="email" placeholder="Email">
+                            </div>
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control shadow-none input-lg" name="fullname" placeholder="Fullname">
+                                
+                            </div>
+                            
+                            <div class="input-group mb-2">
+                               
+                                <input type="text" class="form-control shadow-none input-lg" name="username" placeholder="Username">
+                            </div>
+                            <div class="input-group mb-2">
+                               
+                                <input type="password" class="form-control shadow-none input-lg" name="password" placeholder="Password">
+                            </div>
+                            <div class="input-group mb-2">
+                               
+                                <input type="password" class="form-control shadow-none input-lg" name="password1" placeholder="Repeat Password">
+                            </div>
+                            <p class="text-center">People who use our service may have uploaded <br> your contact information to Instagram. Learn <br> More</p>
+                            <p class="text-center">
+                                By signing up, you agree to our Terms , Data <br> Policy and Cookies Policy .
+                            </p>
+        
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <input class="btn login_btn" type="submit" value="Register Account">
+                            </div>
+                        </form>
+                    </div>
+                    {{form.errors}}
+                   
                 </div>
-                <div class="form-outline mb-4">
-                  <input type="text" id="firstname" class="form-control form-control-lg" name="first_name" />
-                  <label class="form-label" for="fullname">Firstname</label>
-                </div>
-                <div class="form-outline mb-4">
-                  <input type="text" id="lastname" class="form-control form-control-lg" name="last_name" />
-                  <label class="form-label" for="lastname">Lastname</label>
-                </div>
-                <div class="form-outline mb-4">
-                  <input type="text" id="username" class="form-control form-control-lg" name="username" />
-                  <label class="form-label" for="username">Username</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="password" id="password1" class="form-control form-control-lg" name="password1" />
-                  <label class="form-label" for="password1">Password</label>
-                </div>
-                <div class="form-outline mb-4">
-                  <input type="password" id="password2" class="form-control form-control-lg" name="password2" />
-                  <label class="form-label" for="password2">Repeat your password</label>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <button type="submit"
-                    class="btn btn-info btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
-
-              </form>
-
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
-<!-- Default form register -->
+    <div class="row ">
+        <div class="col-md-5 offset-md-3">
+            <div class="mt-4 card p-4">
+                <div class="d-flex justify-content-center links">
+                    Already have an account? <a href="{% url 'login' %}" class="ms-2">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mx-5">
+        <p class="me-5">Get the app.</p>
+        <div>
+            <img src="/static/images/playstore.png" class="me-2" width="15%" alt="">
+            <img src="/static/images/googleapp.png" class="me-5" width="15%" alt="">
+        </div>
+    </div>
+</div>
 
 {% endblock %}

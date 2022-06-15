@@ -177,11 +177,18 @@ def create_average(ratings):
         content+=int(rate.content)
         creativity+=int(rate.creativity)
     
-    des_av=round(design/len(ratings),2)
-    usa_av=round(usability/len(ratings),2)
-    con_av=round(content/len(ratings),2)
-    creat_av=round(creativity/len(ratings),2)
-    score_av=round((des_av+usa_av+con_av+creat_av)/4,2)
+    if len(ratings)!=0:
+        des_av=round(design/len(ratings),2)
+        usa_av=round(usability/len(ratings),2)
+        con_av=round(content/len(ratings),2)
+        creat_av=round(creativity/len(ratings),2)
+        score_av=round((des_av+usa_av+con_av+creat_av)/4,2)
+    else:
+        des_av=0
+        usa_av=0
+        con_av=0
+        creat_av=0
+        score_av=0
     
     return {
         'design_average':des_av,

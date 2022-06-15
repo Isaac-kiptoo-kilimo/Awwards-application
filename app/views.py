@@ -1,4 +1,3 @@
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate,login,logout
@@ -178,11 +177,12 @@ def create_average(ratings):
         content+=int(rate.content)
         creativity+=int(rate.creativity)
     
-    des_av=design/len(ratings)
-    usa_av=usability/len(ratings)
-    con_av=content/len(ratings)
-    creat_av=creativity/len(ratings)
-    score_av=(des_av+usa_av+con_av+creat_av)/4
+    des_av=round(design/len(ratings),2)
+    usa_av=round(usability/len(ratings),2)
+    con_av=round(content/len(ratings),2)
+    creat_av=round(creativity/len(ratings),2)
+    score_av=round((des_av+usa_av+con_av+creat_av)/4,2)
+    
     return {
         'design_average':des_av,
         'usability_average':usa_av,

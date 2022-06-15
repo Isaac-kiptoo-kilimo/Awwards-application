@@ -1,5 +1,6 @@
 {% if user.is_authenticated %}
 <div class="container-fluid">
+  <div class="container-fluid">
     <div class="col-md-12" id="intro">
         <p class="text-center">
             #StopWarInUkraine  
@@ -27,8 +28,8 @@
         <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
       </form>
   </div>
- <div class="col-md-2 mx-2">
-    <div class="mt-2" id="name">
+ <div class="col-md-2">
+    <div class="mt-2  mx-2" id="name">
         <a class="text-decoration-none" href="{% url 'index' %}"><p id="label">awwwards.</p></a>
     </div>
  </div>
@@ -71,4 +72,5 @@
   </div>
 
 </nav>
+</div>
 {% endif %}

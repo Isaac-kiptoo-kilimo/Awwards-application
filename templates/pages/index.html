@@ -8,7 +8,9 @@
             <div class="col-md-6 offset-md-3 text-white">
                 <div class="text-center">
                 <h3 class="">{{post.title}}</h3>
-                <p>BY <span class="text-info">LG2</span> FROM CANADA WITH 7.46 </p>
+                
+                <p>BY <span class="text-info text-uppercase">{{post.user.username}}</span> FROM CANADA WITH {{aves.score_average}}</p>
+                
                 </div>
                </div>
                <div class="row ms-3">
@@ -55,19 +57,17 @@
 
         <div class=" row d-flex align-items-end mb-5 ms-5">
             <div class="col-md-8">
-                <button class="btn btn-info text-white rounded-pill">visit site</button>
+               
+                <a href="{{post.url}}" class="btn btn-info text-white rounded-pill">visit site</a>
                 <button class="btn mx-5 btn-outline-light text-white rounded-pill">collect</button>
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-outline-light text-white rounded-pill">Jury Votes</button>
+                <a href="/rating/{{post.id}}" class="btn btn-outline-light text-white rounded-pill">Jury rating</a>
             </div>
         </div>
 
     </div>
-
-
-
 <div class="container my-5">
     <h4 class="mt-3">Websites Available</h4>
     <div class="row mt-3">
@@ -78,11 +78,10 @@
                <!-- <p> {{post.description}}</p> -->
             <a href="/rating/{{post.id}}">
                 <img src="{{post.post_img.url}}"class="p-0 m-0" height="400px" width="100%"  alt="{{post.title}}">
-            </a>
-            
+            </a>      
             <div class="d-flex m-3">
                 <p class="text-uppercase text-info"> {{post.title}}</p>
-                <a href="/post_view/{{post.id}}" class=" text-info border border-info px-4 py-0 text-decoration-none mx-4">View</a>
+                <a href="/post_view/{{post.id}}" class=" text-info border border-info px-2 py-0 text-decoration-none mx-4">View</a>
                 <a href="{{post.url}}" class="text-decoration-none text-info  border border-info p-1">View Site</a>
             </div>
             <hr>

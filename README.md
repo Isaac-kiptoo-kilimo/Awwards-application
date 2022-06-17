@@ -115,7 +115,7 @@ Copyright © 2022
 # project layout
 
 ### Homepage
-![gallaryup]()
+![Awwardsapp](/static/images/home.png)
 
 ### Admin 
-![gallaryup]()
+![Awwardsapp](/static/images/login.png)
